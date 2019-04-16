@@ -205,6 +205,10 @@ def fermat_primality_test(p, k):
 
 bits = [40, 56, 80, 128, 168, 224, 256, 512, 1024, 2048, 4096]
 '''
+========================================================================================
+                        GERACAO DE NUMEROS ALEATORIOS
+========================================================================================
+
 for bit in bits:
     lcg = LinearCongruentialGenerator(bits = bit)
     lfg = LaggedFibonacciGenerator(bits=bit)
@@ -234,7 +238,16 @@ for bit in bits:
 
     #print("MultiplyWithCarry | bits " + str(bit))
     #print("Random = " + "{:.2E}".format(Decimal(str(n3))) + " tempo parar gerar = " +str(t3))
+
 '''
+
+'''
+
+========================================================================================
+                        GERACAO DE NUMEROS PRIMOS
+========================================================================================
+
+
 for bit in bits:
 
     lfg = LaggedFibonacciGenerator(bits=bit)
@@ -316,3 +329,24 @@ for bit in bits:
             print("Numero primo de mwc " + str(bit) + " encontrado em: " + str(diff1))
             print("miller_rabbin executou em " + str(diff2) + " nro " + str(x))
             break
+'''
+'''
+========================================================================================
+                        TESTE DE PRIMALIDADE PARA OS PRIMOS DE MERSNNE
+========================================================================================
+mersenne_primes = [2**89 - 1, 2**107 - 1, 2**127 - 1, 2**521 - 1, 2**607 - 1, 2**1279-1, 2**9941-1, 2**21701-1, 2**110503-1]
+mersenne_exps = [89, 107, 127, 521, 607, 1279, 9941, 21701, 110503 ]
+i = 0
+for mersenne_prime in mersenne_primes:
+    miller_rabin_test_start = time.time()
+    if miller_rabbin(mersenne_prime, 10):
+        miller_rabin_test_end =  time.time()
+        diff = miller_rabin_test_end - miller_rabin_test_start
+        print("Teste miller-rabin para o mersenne: " + "2**"+str(mersenne_exps[i])+"-1 executou em " + str(diff))
+    fermat_test_start = time.time()
+    if fermat_primality_test(mersenne_prime, 10):
+        fermat_test_end =  time.time()
+        diff = fermat_test_end - fermat_test_start
+        print("Teste de fermat para o mersenne: " + "2**"+str(mersenne_exps[i])+"-1 executou em " + str(diff))
+    i = i + 1
+'''
